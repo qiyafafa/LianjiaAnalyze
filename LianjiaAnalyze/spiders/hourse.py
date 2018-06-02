@@ -2,7 +2,7 @@ import scrapy
 
 
 class QuotesSpider(scrapy.Spider):
-    name = "hourses"
+    name = "a"
 
     def start_requests(self):
         urls = [
