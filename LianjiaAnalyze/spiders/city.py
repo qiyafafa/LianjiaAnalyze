@@ -12,7 +12,11 @@ class CitySpider(scrapy.Spider):
             yield scrapy.Request(url=url, callback=self.parse)
 
     def parse(self, response):
-        for title in response.css('ul.clear'):
-            yield {
-                'city': title.css('li.a::text').extract_first()
-            }
+        for ul in response.css('ul.clear'):
+            city_names = ul.xpath('li/a/text()').extract()
+            city_urls = ul.xpath('li/a/@href').extract()
+            for i in range(0, len(city_names)):
+            	yield {
+	     		'city':    city_names[i],
+	     		'city_url': city_urls[i]
+            	}
